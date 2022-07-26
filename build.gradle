@@ -19,7 +19,7 @@ repositories {
 }
 
 bootJar {
-    enabled = false
+    enabled = true
 }
 
 jar {
