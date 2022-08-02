@@ -18,9 +18,9 @@ cache:
 script: "./gradlew clean build"
 
 before_deploy:
-  - zip -r aws_study
+  - zip -r aws-study
   - mkdir -p deploy
-  - mv aws_study.zip deploy/aws_study.zip
+  - mv aws-study.zip deploy/aws-study.zip
 
 deploy:
   - provider: s3
