@@ -5,13 +5,10 @@ import com.songdo.aws_study.config.auth.dto.SessionUser;
 import com.songdo.aws_study.service.posts.PostsService;
 import com.songdo.aws_study.web.dto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.web.server.Http2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
-import javax.servlet.http.HttpSession;
 
 @RequiredArgsConstructor
 @Controller
