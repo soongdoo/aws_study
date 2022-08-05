@@ -10,7 +10,7 @@ cp $REPOSITORY/zip/*.jar $REPOSITORY/
 echo "> 현재 구동중인 애플리케이션 pid 확인"
 
 #CURRENT_PID=$(pgrep -fl aws_study | grep java | awk '{print $1}')
-CURRENT_PID=$(ps -ef | grep ${PROJECT_NAME} | grep java | awk '{print $1}') # 동일한 로직의 스크립트를 작성해봤더니 정상출력됩니다.
+CURRENT_PID=$(ps -ef | grep ${PROJECT_NAME} | grep jar | awk '{print $1}') # 동일한 로직의 스크립트를 작성해봤더니 정상출력됩니다.
 
 echo "현재 구동중인 어플리케이션 pid: $CURRENT_PID"
 
