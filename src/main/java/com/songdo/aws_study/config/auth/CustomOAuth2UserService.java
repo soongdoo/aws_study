@@ -39,7 +39,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         String registrationId = userRequest.getClientRegistration().getRegistrationId();
         String userNameAttributeName = userRequest.getClientRegistration().getProviderDetails().getUserInfoEndpoint()
                 /*
-                OAuth2 로그인 진행 시 키가 되는 필드값 Primary Key와 같은 의미
+                OAuth2 로그인 진행 시 키가 되는 필드값 Primary Key 와 같은 의미
                 구글의 경우 기본적으로 코드를 지원하지만, 네이버 카카오 등은 기본 지원하지 않는다. 구글의 기본 코드는 "sub"
                 이후 네이버 로그인과 구글 로그인을 동시 지원할 때 사용된다.
                  */
