@@ -68,7 +68,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_ID }}
         run: |
           aws deploy create-deployment 
-          --application-name springboot-aws-study
+          --application-name aws_study
           --deployment-group-name springboot-aws-study-group
           --file-exists-behavior OVERWRITE 
           --s3-location bucket=springboot-aws-study-build,bundleType=zip,key=aws_study.zip 
