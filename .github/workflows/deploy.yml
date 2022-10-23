@@ -45,7 +45,7 @@ jobs:
       run: cp ./scripts/*.sh ./deploy
 
     - name: Make zip file
-      run: zip -r ./springboot-aws-study.zip ./deploy
+      run: zip -r ./aws_study.zip ./deploy
       shell: bash
 
     - name: Configure AWS credentials
@@ -56,7 +56,7 @@ jobs:
         aws-region: ap-northeast-2
 
     - name: Upload to S3
-      run: aws s3 cp --region ap-northeast-2 ./springboot-aws-study.zip s3://$S3_BUCKET_NAME/
+      run: aws s3 cp --region ap-northeast-2 ./aws_study.zip s3://$S3_BUCKET_NAME/
 
 
 
@@ -70,5 +70,5 @@ jobs:
         --application-name springboot-aws-study
         --deployment-group-name springboot-aws-study-group
         --file-exists-behavior OVERWRITE 
-        --s3-location bucket=springboot-aws-study-build,bundleType=zip,key=springboot-aws-study.zip 
+        --s3-location bucket=springboot-aws-study-build,bundleType=zip,key=aws_study.zip 
         --region ap-northeast-2
