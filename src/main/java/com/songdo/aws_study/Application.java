@@ -1,7 +1,6 @@
 package com.songdo.aws_study;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 
 @SpringBootApplication
@@ -11,6 +10,7 @@ public class Application {
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
+
         // 여기서 내장WAS (Web Application Service) 실행
         // 외부에 별도 was 를 두지 않고 애플리케이션 실행할 때 내부에서 was를 실행 == 톰캣 설치 불필요 스프링 부트로 만들어진 jar파일 실행
     }
