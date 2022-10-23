@@ -5,7 +5,7 @@ on:
   pull_request:
     branches: [ main ]
   workflow_dispatch:
-    
+
 env:
   S3_BUCKET_NAME: springboot-aws-study-build
 jobs:
@@ -20,6 +20,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '17'
+          distribution: 'temurin'
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
@@ -70,5 +71,5 @@ jobs:
           --application-name springboot-aws-study
           --deployment-group-name springboot-aws-study-group
           --file-exists-behavior OVERWRITE 
-          --s3-location bucket=springboot-aws-study-build,bundleType=zip,key=aws_study.zip 
+          --s3-location bucket=springboot-aws-study-build, bundleType=zip,key=aws_study.zip 
           --region ap-northeast-2
