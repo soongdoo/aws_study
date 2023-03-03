@@ -1,4 +1,4 @@
-env:
+env: # 환경 변수를 이름: 값 으로 지정합니다. 자주 사용되거나 변경되는 부분은 환경 변수로 지정하면 편하게 사용 가능합니다.
   S3_BUCKET_NAME: springboot-aws-study-build
   PROJECT_NAME: aws_study
   CODE_DEPLOY_APP_NAME: springboot-aws-study
@@ -26,28 +26,28 @@ jobs:
         uses: actions/checkout@v3  # (5) 프로젝트 코드를 CheckOut합니다.
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v3 # (6)
+        uses: actions/setup-java@v3 # (6) github action이 실행될 OS에 Java를 설치합니다.
         with:
           java-version: '17'
           distribution: 'temurin'
 
       - name: Grant execute permission for gradlew
-        run: chmod +x ./gradlew # (7)
+        run: chmod +x ./gradlew # (7) gradle wrapper를 실행할 수 있도록 실행 권한 (+x)을 줍니다.
         shell: bash
 
       - name: Build with Gradle
-        run: ./gradlew clean -x test build # (8)
+        run: ./gradlew clean -x test build # (8) gradle wrapper를 통해 해당 프로젝트를 build 합니다.
         shell: bash
 
       - name: Get current time
         uses: 1466587594/get-current-time@v2
         id: current-time
         with:
-          format: YYYY-MM-DDTHH-mm-ss # (9)
+          format: YYYY-MM-DDTHH-mm-ss # (9) KST로 진행하기 위해 offset +09:00
           utcOffset: "+09:00"
 
       - name: Show Current Time
-        run: echo "CurrentTime=${{steps.current-time.outputs.formattedTime}}" # (10)
+        run: echo "CurrentTime=${{steps.current-time.outputs.formattedTime}}" # (10) 지정한 포맷대로 현재 시간을 출력해줍니다.
         shell: bash
 
       - name: Generate deployment package # (final)
@@ -62,12 +62,12 @@ jobs:
         shell: bash
 
       - name: Make zip file
-        run: zip -r ./$PROJECT_NAME.zip .         # (12)
+        run: zip -r ./$PROJECT_NAME.zip .         # (12) 프로젝트 이름으로 해당 폴더를 모두 압축시킵니다. (빌드된 전체 폴더)
         shell: bash
 
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1      #(13)
+        uses: aws-actions/configure-aws-credentials@v1      #(13) aws에 해당 키 값으로 접속을 진행합니다.
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_ID }}
@@ -75,7 +75,7 @@ jobs:
 
 
       - name: Upload to S3 #변경사항 있음! ./$PROJECT_NAME.zip ->  ./deploy/$PROJECT_NAME.zip 로 변경!!
-        run: aws s3 cp --region ap-northeast-2 ./deploy/$PROJECT_NAME.zip s3://$S3_BUCKET_NAME/$PROJECT_NAME/$PROJECT_NAME.zip  #(14)
+        run: aws s3 cp --region ap-northeast-2 ./deploy/$PROJECT_NAME.zip s3://$S3_BUCKET_NAME/$PROJECT_NAME/$PROJECT_NAME.zip  #(14) s3에 프로젝트 이름에 해당하는폴더에 zip 파일을 저장합니다.
 
       - name: Code Deploy
         run: aws deploy create-deployment --application-name $CODE_DEPLOY_APP_NAME --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name $CODE_DEPLOY_GROUP_NAME --ignore-application-stop-failures --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=$PROJECT_NAME/$PROJECT_NAME.zip --description "Ignore ApplicationStop failures due to broken scripts"
